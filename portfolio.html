@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brit Fetzer — Product Designer</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #111;
+      --gray-dark: #444;
+      --gray-mid: #888;
+      --gray-light: #e5e5e5;
+      --gray-bg: #f5f5f5;
+      --white: #fff;
+      --max-width: 1248px;
+      --side-pad: 96px;
+      --section-gap: 120px;
+      --label-head: 32px;
+      --head-body: 48px;
+      --inner-gap: 40px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--black); text-decoration: none; }
+    a:hover { opacity: 0.6; }
+
+    /* ===== LAYOUT ===== */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .container {
+      max-width: calc(var(--max-width) + var(--side-pad) * 2);
+      margin: 0 auto;
+      padding: 0 var(--side-pad);
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      z-index: 100;
+      border-bottom: 1px solid var(--black);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-logo:hover { opacity: 0.6; }
+
+    .nav-links { display: flex; gap: 40px; }
+
+    .nav-links a {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+    }
+
+    /* ===== SECTION LABELS ===== */
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--gray-mid);
+      text-transform: lowercase;
+      margin-bottom: var(--label-head);
+    }
+
+    .section-heading {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: var(--head-body);
+    }
+
+    .section-heading.large {
+      font-size: 36px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--black);
+      margin: var(--inner-gap) 0;
+    }
+
+    .section-spacer {
+      height: var(--section-gap);
+    }
+
+    /* ===== HOME — HERO ===== */
+    .hero {
+      padding-top: 80px;
+      padding-bottom: 0;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero-description {
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 800px;
+      color: var(--gray-dark);
+      margin-bottom: 48px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--black);
+      color: var(--white);
+      font-family: inherit;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .cta-button:hover { opacity: 0.7; color: var(--white); }
+
+    .cta-button.outline {
+      background: transparent;
+      color: var(--black);
+      border: 1px solid var(--black);
+    }
+
+    .cta-button.outline:hover { background: var(--black); color: var(--white); opacity: 1; }
+
+    /* ===== STATS ===== */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      padding: 60px 0;
+    }
+
+    .stat-number {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--gray-mid);
+    }
+
+    /* ===== PROJECT CARDS ===== */
+    .project-card {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 40px;
+      align-items: start;
+      padding: 60px 0;
+    }
+
+    .project-number {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-mid);
+      margin-bottom: 8px;
+    }
+
+    .project-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 40px;
+    }
+
+    .project-description {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--gray-dark);
+      max-width: 640px;
+      margin-bottom: 20px;
+    }
+
+    .project-link {
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .project-thumbnail {
+      width: 100%;
+      aspect-ratio: 3/2;
+      background: var(--gray-bg);
+      border-radius: 4px;
+    }
+
+    /* ===== BACKGROUND ===== */
+    .background-row {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 40px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .background-row:last-child { border-bottom: 1px solid var(--black); }
+
+    .bg-role {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .bg-detail {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--gray-dark);
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-section {
+      padding-bottom: 80px;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 32px;
+      margin-top: 16px;
+    }
+
+    .contact-links a {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== CASE STUDY — HEADER ===== */
+    .case-back {
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--gray-mid);
+      display: inline-block;
+      padding: 24px 0 24px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .case-back:hover { color: var(--black); }
+
+    .case-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--gray-mid);
+      margin-bottom: 8px;
+    }
+
+    .case-title {
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 40px;
+    }
+
+    .case-subtitle {
+      font-size: 20px;
+      line-height: 1.6;
+      max-width: 1000px;
+      margin-bottom: 40px;
+    }
+
+    /* ===== META ROW ===== */
+    .meta-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      padding: 20px 0;
+      border-top: 1px solid var(--black);
+      border-bottom: 1px solid var(--black);
+    }
+
+    .meta-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 6px;
+    }
+
+    .meta-value {
+      font-size: 13px;
+    }
+
+    /* ===== HERO IMAGE PLACEHOLDER ===== */
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 2.6/1;
+      background: var(--gray-bg);
+      border-radius: 4px;
+      margin: 24px 0 16px;
+    }
+
+    .prototype-link {
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--gray-mid);
+    }
+
+    .prototype-link:hover { color: var(--black); }
+
+    /* ===== QUOTES ===== */
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .quote-card {
+      border-top: 2px solid var(--black);
+      padding-top: 16px;
+    }
+
+    .quote-text {
+      font-size: 14px;
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .quote-attr {
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--gray-mid);
+    }
+
+    /* ===== INSIGHT BLOCK ===== */
+    .insight-quote {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.5;
+      max-width: 1048px;
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    .insight-attr {
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--gray-mid);
+    }
+
+    /* ===== PERSONA / ARCHETYPE CARDS ===== */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .persona-card { border-top: 1px solid var(--black); padding-top: 24px; }
+
+    .persona-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 8px;
+    }
+
+    .persona-name {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .persona-subtitle {
+      font-size: 13px;
+      color: var(--gray-mid);
+      margin-bottom: 20px;
+    }
+
+    .persona-section-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 4px;
+      margin-top: 16px;
+    }
+
+    .persona-section-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--gray-dark);
+    }
+
+    /* ===== THEME / LIST ROWS ===== */
+    .theme-row {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 0;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .theme-row:first-child { border-top: 1px solid var(--black); }
+    .theme-row:last-child { border-bottom: 1px solid var(--black); }
+
+    .theme-num {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-mid);
+    }
+
+    .theme-content {}
+
+    .theme-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .theme-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--gray-dark);
+    }
+
+    /* ===== STRATEGY / PILLAR ROWS ===== */
+    .strategy-row {
+      display: grid;
+      grid-template-columns: 60px 440px 1fr;
+      gap: 0;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .strategy-row:first-child { border-top: 1px solid var(--black); }
+    .strategy-row:last-child { border-bottom: 1px solid var(--black); }
+
+    .strategy-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .strategy-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--gray-dark);
+    }
+
+    /* ===== DECISION BLOCKS ===== */
+    .decision-block {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .decision-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 12px;
+    }
+
+    .decision-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .decision-sub-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 4px;
+      margin-top: 24px;
+    }
+
+    .decision-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--gray-dark);
+      max-width: 560px;
+    }
+
+    /* ===== ARROW LIST ===== */
+    .arrow-list { list-style: none; }
+
+    .arrow-list li {
+      font-size: 14px;
+      line-height: 1.7;
+      padding: 6px 0;
+    }
+
+    .arrow-list li::before {
+      content: "→ ";
+      color: var(--gray-mid);
+    }
+
+    /* ===== SURVEY ROWS ===== */
+    .survey-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      align-items: baseline;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .survey-stat {
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    .survey-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--gray-dark);
+    }
+
+    /* ===== OUTCOME TABLE ===== */
+    .outcome-table { width: 100%; }
+
+    .outcome-header {
+      display: grid;
+      grid-template-columns: 500px 220px 1fr;
+      gap: 16px;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--black);
+    }
+
+    .outcome-row {
+      display: grid;
+      grid-template-columns: 500px 220px 1fr;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-light);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .outcome-row:last-child { border-bottom: 1px solid var(--black); }
+
+    .status-badge {
+      font-size: 11px;
+      letter-spacing: 0.04em;
+    }
+
+    .status-badge.validated { color: var(--black); }
+    .status-badge.partial { color: var(--gray-mid); }
+    .status-badge.new { color: var(--gray-mid); font-style: italic; }
+
+    /* ===== ROADMAP ===== */
+    .roadmap-row {
+      display: grid;
+      grid-template-columns: 120px 280px 1fr 200px;
+      gap: 0;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--gray-light);
+      font-size: 13px;
+    }
+
+    .roadmap-row:first-child { border-top: 1px solid var(--black); }
+    .roadmap-row:last-child { border-bottom: 1px solid var(--black); }
+
+    .roadmap-phase {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+
+    .roadmap-date {
+      font-size: 11px;
+      color: var(--gray-mid);
+    }
+
+    .roadmap-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--gray-dark);
+    }
+
+    .roadmap-label {
+      font-size: 18px;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    /* ===== NEXT PARAGRAPH ===== */
+    .next-text {
+      font-size: 14px;
+      line-height: 1.8;
+      max-width: 1040px;
+      color: var(--gray-dark);
+    }
+
+    /* ===== PRODUCT SHOWCASE ===== */
+    .product-showcase {
+      width: 100%;
+      aspect-ratio: 1248/720;
+      background: var(--gray-bg);
+      border-radius: 4px;
+    }
+
+    /* ===== FOOTER ===== */
+    .case-footer {
+      padding: 40px 0 80px;
+      border-top: 1px solid var(--black);
+    }
+
+    .case-footer-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .case-footer-nav a {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .case-copyright {
+      border-top: 1px solid var(--gray-light);
+      padding-top: 16px;
+      font-size: 11px;
+      color: var(--gray-mid);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      :root { --side-pad: 48px; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-thumbnail { max-width: 360px; }
+      .strategy-row { grid-template-columns: 60px 1fr; }
+      .strategy-desc { grid-column: 2; margin-top: 4px; }
+      .roadmap-row { grid-template-columns: 1fr; gap: 8px; }
+      .roadmap-label { text-align: left; }
+      .outcome-header, .outcome-row { grid-template-columns: 1fr; gap: 4px; }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --side-pad: 24px;
+        --section-gap: 80px;
+      }
+      .case-title { font-size: 40px; }
+      .stats-row { grid-template-columns: repeat(3, 1fr); }
+      .meta-row { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .quote-grid { grid-template-columns: 1fr; }
+      .persona-grid { grid-template-columns: 1fr; }
+      .background-row { grid-template-columns: 1fr; gap: 8px; }
+      .survey-row { grid-template-columns: 1fr; gap: 8px; }
+      .theme-row { grid-template-columns: 1fr; }
+      .theme-num { margin-bottom: 4px; }
+      .strategy-row { grid-template-columns: 1fr; }
+      .strategy-title { grid-column: 1; }
+      .strategy-desc { grid-column: 1; }
+      .nav-links { gap: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 12px; }
+    }
+
+    /* ===== EMBEDDED IFRAME ===== */
+    .embed-wrapper {
+      position: relative;
+      width: 100%;
+      height: 640px;
+      margin: 24px 0 16px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--gray-light);
+      background: var(--gray-bg);
+    }
+
+    .embed-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      .embed-wrapper { height: 480px; }
+    }
+
+    /* ===== WORK PAGE GRID ===== */
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 60px 0;
+    }
+
+    .work-card {
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .work-card:hover { opacity: 0.7; }
+
+    .work-card-thumbnail {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--gray-bg);
+      border-radius: 4px;
+      margin-bottom: 24px;
+    }
+
+    .work-card-number {
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--gray-mid);
+      margin-bottom: 8px;
+    }
+
+    .work-card-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .work-card-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--gray-dark);
+      margin-bottom: 16px;
+    }
+
+    .work-card-link {
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .work-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== TRANSITIONS ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav>
+  <div class="container">
+    <a class="nav-logo" href="#" onclick="showPage('home'); window.scrollTo(0,0); return false;">brit fetz</a>
+    <div class="nav-links">
+      <a href="#" onclick="showPage('work'); window.scrollTo(0,0); return false;">work</a>
+      <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('about-section')?.scrollIntoView({behavior:'smooth'}),50); return false;">about</a>
+      <a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('contact-section')?.scrollIntoView({behavior:'smooth'}),50); return false;">contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="page-home" class="page active">
+  <div class="container">
+
+    <!-- INTRO -->
+    <section class="hero">
+      <p class="section-label">01 / intro</p>
+      <h1 class="hero-title">Hello I'm Brit</h1>
+      <p class="hero-description">Civil engineer. Tech recruiter. Product designer. I've spent a decade interviewing people and untangling messy systems. Now I design the interfaces between them.</p>
+      <a class="cta-button" href="#" onclick="document.getElementById('work-section')?.scrollIntoView({behavior:'smooth'}); return false;">See my work &rarr;</a>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-row fade-in">
+      <div><div class="stat-number">5+</div><div class="stat-label">years interviewing</div></div>
+      <div><div class="stat-number">200+</div><div class="stat-label">jobs filled</div></div>
+      <div><div class="stat-number">5+</div><div class="stat-label">yrs civil engineering</div></div>
+      <div><div class="stat-number">100+</div><div class="stat-label">engineered solutions</div></div>
+      <div><div class="stat-number">2</div><div class="stat-label">shipped case studies</div></div>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- SELECTED WORK -->
+    <section id="work-section">
+      <p class="section-label">02 / selected work</p>
+      <div class="divider" style="margin-top: 24px;"></div>
+
+      <!-- Neighbors -->
+      <div class="project-card fade-in">
+        <div>
+          <div class="project-number">01</div>
+          <h2 class="project-title">Neighbors</h2>
+          <p class="project-description">A trust-first, hyperlocal platform for Barcelona apartment residents. Built on real research, structured without pressure, and designed to grow from one building to one city, one verified neighbor at a time.</p>
+          <a href="#" class="project-link" onclick="showPage('neighbors'); window.scrollTo(0,0); return false;">view case study &rarr;</a>
+        </div>
+        <div class="project-thumbnail"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- VeriHire -->
+      <div class="project-card fade-in">
+        <div>
+          <div class="project-number">02</div>
+          <h2 class="project-title">VeriHire</h2>
+          <p class="project-description">A recruiting platform that turns messy hiring pipelines into structured decisions. Built from 5 years on the inside.</p>
+          <a href="#" class="project-link" onclick="showPage('verihire'); window.scrollTo(0,0); return false;">view case study &rarr;</a>
+        </div>
+        <div class="project-thumbnail"></div>
+      </div>
+
+      <div class="divider"></div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <!-- BACKGROUND -->
+    <section id="about-section">
+      <p class="section-label">03 / background</p>
+      <div style="height: 40px;"></div>
+      <div class="divider" style="margin:0;"></div>
+      <div class="background-row fade-in">
+        <div class="bg-role">Civil engineer</div>
+        <div class="bg-detail">&rarr; 5 years. Structural analysis. Reading systems under load.</div>
+      </div>
+      <div class="background-row fade-in">
+        <div class="bg-role">Tech recruiter</div>
+        <div class="bg-detail">&rarr; 5+ years. Interviewing 20 people a week. Spotting signal in noise.</div>
+      </div>
+      <div class="background-row fade-in" style="border-bottom: 1px solid var(--black);">
+        <div class="bg-role">Product designer</div>
+        <div class="bg-detail">&rarr; Now. Designing the tools I wished existed on the other side of the table.</div>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <!-- CONTACT -->
+    <section id="contact-section" class="contact-section">
+      <p class="section-label">04 / contact</p>
+      <div style="height: 60px;"></div>
+      <a class="cta-button outline" href="mailto:bfetzner91@gmail.com">Email me</a>
+      <div class="contact-links" style="margin-top: 24px;">
+        <a href="https://www.linkedin.com/in/brittany-fetzner/" target="_blank">linkedin &nearr;</a>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ==================== WORK PAGE ==================== -->
+<div id="page-work" class="page">
+  <div class="container">
+    <div style="padding-top: 60px;">
+      <p class="section-label">selected work</p>
+      <h2 class="section-heading large">Case studies</h2>
+    </div>
+    <div class="divider" style="margin-top: 0;"></div>
+
+    <div class="work-grid">
+      <div class="work-card fade-in" onclick="showPage('neighbors'); window.scrollTo(0,0);">
+        <div class="work-card-thumbnail"></div>
+        <div class="work-card-number">01</div>
+        <h3 class="work-card-title">Neighbors</h3>
+        <p class="work-card-desc">The digital knock on your neighbors door.</p>
+        <span class="work-card-link">view case study &rarr;</span>
+      </div>
+
+      <div class="work-card fade-in" onclick="showPage('verihire'); window.scrollTo(0,0);">
+        <div class="work-card-thumbnail"></div>
+        <div class="work-card-number">02</div>
+        <h3 class="work-card-title">VeriHire</h3>
+        <p class="work-card-desc">A recruiting platform that turns messy hiring pipelines into structured decisions. Built from 5 years on the inside.</p>
+        <span class="work-card-link">view case study &rarr;</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== VERIHIRE CASE STUDY ==================== -->
+<div id="page-verihire" class="page">
+  <div class="container">
+
+    <a class="case-back" href="#" onclick="showPage('home'); window.scrollTo(0,0); return false;">&larr; back to work</a>
+    <p class="case-label">case &middot; 02</p>
+    <h1 class="case-title">VeriHire</h1>
+    <p class="case-subtitle">A trust-first recruiting platform built on two-sided verification, radical transparency, and fewer, but better, conversations.</p>
+
+    <!-- META -->
+    <div class="meta-row">
+      <div><div class="meta-label">Role</div><div class="meta-value">ux research &middot; product design</div></div>
+      <div><div class="meta-label">With</div><div class="meta-value">co-researcher</div></div>
+      <div><div class="meta-label">Timeframe</div><div class="meta-value">10 weeks</div></div>
+      <div><div class="meta-label">Sector</div><div class="meta-value">SaaS</div></div>
+      <div><div class="meta-label">Year</div><div class="meta-value">2025 &mdash; 2026</div></div>
+    </div>
+
+    <!-- HERO IMAGE -->
+    <div class="hero-image"></div>
+    <a class="prototype-link" href="#" target="_blank">figma prototype &nearr;</a>
+
+    <div class="section-spacer"></div>
+
+    <!-- 01 / CONTEXT -->
+    <section class="fade-in">
+      <p class="section-label">01 / context</p>
+      <h2 class="section-heading large">Trust is collapsing on both sides of the table.</h2>
+      <p class="next-text">Digital recruiting has a dual-direction fraud problem. Recruiters get hit with fake candidates, interview imposters, and AI-assisted screen performances. IT professionals get hit with fake recruiters, phishing outreach, and vague job postings that lead nowhere. LinkedIn's verification shield exists &mdash; but it doesn't prevent an interview swap-out, and many recruiters can't even get themselves verified despite uploading passports. There is no neutral environment where both sides can prove who they are and engage safely.</p>
+    </section>
+
+    <div class="divider"></div>
+    <div class="section-spacer"></div>
+
+    <!-- 02 / RESEARCH -->
+    <section class="fade-in">
+      <p class="section-label">02 / research</p>
+      <h2 class="section-heading large">What we did. Who we talked to.</h2>
+
+      <div class="stats-row" style="padding: 40px 0;">
+        <div><div class="stat-number">20+</div><div class="stat-label">video interviews</div></div>
+        <div><div class="stat-number">12</div><div class="stat-label">it recruiters</div></div>
+        <div><div class="stat-number">9</div><div class="stat-label">it professionals</div></div>
+        <div><div class="stat-number">4</div><div class="stat-label">platforms benchmarked</div></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="padding: var(--inner-gap) 0;">
+        <p class="persona-section-label">approach</p>
+        <ul class="arrow-list" style="margin-top: 16px;">
+          <li>Moderated semi-structured interviews &mdash; both sides of the table.</li>
+          <li>Desk research across LinkedIn, Dice, Indeed, GitHub, ATS tools.</li>
+          <li>Customer journey mapping &mdash; sourcing &rarr; outreach &rarr; screening &rarr; shortlist.</li>
+          <li>Analysis: transcription, initial coding, affinity mapping, thematic analysis.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+    <div class="section-spacer"></div>
+
+    <!-- 03 / VOICES -->
+    <section class="fade-in">
+      <p class="section-label">03 / voices</p>
+      <h2 class="section-heading large">What they told us.</h2>
+
+      <div class="quote-grid">
+        <div class="quote-card">
+          <p class="quote-text">"I went through the interviews, same guy the entire time. He was good on his pre-screen. He was good in his interviews. A different person showed up the first day."</p>
+          <p class="quote-attr">Sam &middot; Sr. SaaS Recruiter &middot; 6 yrs in IT</p>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">"If it's just 'let's get on a call,' I'm not bothering. It comes down to personalization and real details about the role."</p>
+          <p class="quote-attr">Zak &middot; Sr. Cloud Support Engineer &middot; 5 yrs in IT</p>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">"[The LinkedIn badge] is irrelevant for me. I haven't been able to verify my own profile, even though I've uploaded my passport and ID."</p>
+          <p class="quote-attr">Leslie &middot; General Recruiter &middot; 1 yr in IT</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+    <div class="section-spacer"></div>
+
+    <!-- 04 / PERSONAS -->
+    <section class="fade-in">
+      <p class="section-label">04 / personas</p>
+      <h2 class="section-heading large">Who we're designing for.</h2>
+
+      <div class="persona-grid">
+        <div class="persona-card">
+          <p class="persona-label">Persona 01</p>
+          <h3 class="persona-name">Alex</h3>
+          <p class="persona-subtitle">sr. it recruiter &middot; 6+ yrs</p>
+          <p class="persona-section-label">Behaviors</p>
+          <p class="persona-section-text">Lives in LinkedIn Recruiter. Falls back to Dice. Checks photo quality, connections depth, resume-to-profile consistency. Now defaults to video screens because fraud changed the game.</p>
+          <p class="persona-section-label">Pain Points</p>
+          <p class="persona-section-text">Interview swap-outs. Keyword-stuffed r&eacute;sum&eacute;s. Platform badges that don't mean anything. High admin load forces blanket messaging &mdash; which candidates read as spam.</p>
+          <p class="persona-section-label">What They Want</p>
+          <p class="persona-section-text">A lightweight "proof" layer so screening isn't the first time identity is validated. Two-sided verification that's reliable and inclusive.</p>
+        </div>
+        <div class="persona-card">
+          <p class="persona-label">Persona 02</p>
+          <h3 class="persona-name">Jordan</h3>
+          <p class="persona-subtitle">it professional &middot; active or passive</p>
+          <p class="persona-section-label">Behaviors</p>
+          <p class="persona-section-text">Judges recruiter legitimacy in seconds: sender domain, grammar, mutual connections, personalization, role specificity. Ignores low-effort platforms entirely.</p>
+          <p class="persona-section-label">Pain Points</p>
+          <p class="persona-section-text">Spam disguised as outreach. "Let's hop on a call" with no details. Vague job postings. Ghosting after interviews &mdash; used to pad a pipeline.</p>
+          <p class="persona-section-label">What They Want</p>
+          <p class="persona-section-text">Fewer, higher-signal messages. Proof the recruiter actually looked at the profile. Status visibility through the process &mdash; even "no" beats silence.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+    <div class="section-spacer"></div>
+
+    <!-- 05 / INSIGHT -->
+    <section class="fade-in">
+      <p class="section-label">05 / insight</p>
+      <p class="insight-quote">"Fraud is creating a downward spiral. Recruiters get conservative, candidates get suspicious, and legitimate people on both sides lose access. The fix isn't more platform badges. It's process-level, two-sided trust."</p>
+      <p class="insight-attr">&mdash; synthesis across 11 interviews, jan 2026</p>
+    </section>
+
+    <div class="divider"></div>
+    <div class="section-spacer"></div>
+
+    <!-- 06 / CROSS-INTERVIEW THEMES -->
+    <section class="fade-in">
+      <p class="section-label">06 / cross-interview themes</p>
+      <h2 class="section-heading large">Five patterns we heard from everyone.</h2>
+
+      <div class="theme-row">
+        <div class="theme-num">01</div>
+        <div class="theme-content">
+          <div class="theme-title">Fraud changes behavior in negative ways.</div>
+          <div class="theme-desc">Recruiters limit who they'll consider; candidates become suspicious and less responsive. A downward spiral of mistrust.</div>
+        </div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-num">02</div>
+        <div class="theme-content">
+          <div class="theme-title">Admin burden is part of the trust problem.</div>
+          <div class="theme-desc">Overloaded workflows drive the blanket-messaging culture that candidates perceive as spam.</div>
+        </div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-num">03</div>
+        <div class="theme-content">
+          <div class="theme-title">Platform verification &ne; process verification.</div>
+          <div class="theme-desc">A badge doesn't stop an interview swap-out. Recruiters have watched a different person show up on day one.</div>
+        </div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-num">04</div>
+        <div class="theme-content">
+          <div class="theme-title">Trust is currently DIY and informal.</div>
+          <div class="theme-desc">Both sides rely on personal heuristics, photo quality, grammar, eye movement, r&eacute;sum&eacute; consistency, because platform-level proof is weak.</div>
+        </div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-num">05</div>
+        <div class="theme-content">
+          <div class="theme-title">Vagueness is interpreted as risk.</div>
+          <div class="theme-desc">Candidates want specifics. Vague outreach or vague postings feel scammy and kill engagement.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <!-- 07 / STRATEGY -->
+    <section class="fade-in">
+      <p class="section-label">07 / strategy</p>
+      <h2 class="section-heading large">Four moves to get from platform trust to process trust.</h2>
+
+      <div class="strategy-row">
+        <div class="theme-num">01</div>
+        <div class="strategy-title">Early role transparency</div>
+        <div class="strategy-desc">Recruiters must include a minimum set of details, salary range, tech stack, location, before the platform will let the outreach send.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="theme-num">02</div>
+        <div class="strategy-title">Mutual identity verification</div>
+        <div class="strategy-desc">Both recruiters and IT professionals verify before they can join. Invite-only. Recruiters gated by placement history.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="theme-num">03</div>
+        <div class="strategy-title">Clear status visibility</div>
+        <div class="strategy-desc">Candidates see live progress on every application. "Pending" is a state, not a silence. Ghosting ends.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="theme-num">04</div>
+        <div class="strategy-title">Fewer, higher-signal messages</div>
+        <div class="strategy-desc">Quality is rewarded and volume is penalized. Recruiters who blanket-message lose platform trust score.</div>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <!-- 08 / DESIGN DECISIONS -->
+    <section class="fade-in">
+      <p class="section-label">08 / design decisions</p>
+      <h2 class="section-heading large">Three features that make the strategy real.</h2>
+      <div class="divider"></div>
+
+      <div class="decision-block">
+        <p class="decision-label">Decision 01 &middot; Outreach Meter</p>
+        <h3 class="decision-title">The platform refuses to send vague messages.</h3>
+        <p class="decision-sub-label">Tension</p>
+        <p class="decision-text">"If it's just 'let's get on a call,' I'm not bothering." &mdash; Zak, IT Professional. Vague outreach kills response rates and trains candidates to ignore everything.</p>
+        <p class="decision-sub-label">Decision</p>
+        <p class="decision-text">Every outreach message runs through a real-time Transparency Score meter. Recruiters see which fields are missing &mdash; salary, tech stack, location, hiring manager, role scope. Below threshold, the send button is disabled. The score is visible to the recipient in the notification, so candidates know exactly how much the recruiter showed up with.</p>
+      </div>
+
+      <div class="decision-block">
+        <p class="decision-label">Decision 02 &middot; Two-Sided Verification</p>
+        <h3 class="decision-title">Both sides prove who they are &mdash; before they're in.</h3>
+        <p class="decision-sub-label">Tension</p>
+        <p class="decision-text">"The LinkedIn badge is irrelevant for me." &mdash; Leslie, Recruiter. Platform verification doesn't stop interview swap-outs. Many recruiters can't even get verified themselves.</p>
+        <p class="decision-sub-label">Decision</p>
+        <p class="decision-text">Invite-only. IT professionals are vouched for by peers; their work history is verified by pinging HR emails of prior employers. Recruiters are gated by placement history (1+ year, 35+ placements) and invited by existing verified recruiters. Biometric + ID check on both sides. The verified badge lives on every card, every message, every interview loop.</p>
+      </div>
+
+      <div class="decision-block">
+        <p class="decision-label">Decision 03 &middot; Progress Bar</p>
+        <h3 class="decision-title">Silence is no longer a status.</h3>
+        <p class="decision-sub-label">Tension</p>
+        <p class="decision-text">"Ghosting is interpreted as disrespect." &mdash; Neal, CTO. "Needs status visibility &mdash; even 'no' is better than silence." The black hole is the #1 thing candidates hate about recruiting.</p>
+        <p class="decision-sub-label">Decision</p>
+        <p class="decision-text">Every application has a live progress bar: Screened &rarr; Submitted &rarr; Interviewing &rarr; Decision. Recruiters can mark a role "On hold" or "Closed" with one click, and the status auto-pushes to every candidate's dashboard. The recruiter's Transparency Score goes up for timely closures and down for dormant pipelines.</p>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <!-- 09 / JOURNEY -->
+    <section class="fade-in">
+      <p class="section-label">09 / journey</p>
+      <h2 class="section-heading large">The future loop &mdash; from invite to hire.</h2>
+
+      <div class="strategy-row">
+        <div class="theme-num">01</div>
+        <div class="strategy-title">Onboarding</div>
+        <div class="strategy-desc">Recruiter invited by an existing verified recruiter (1+ yr, 35+ placements). IT pro invited by a peer &mdash; vouched for, not signed up.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="theme-num">02</div>
+        <div class="strategy-title">Profile setup</div>
+        <div class="strategy-desc">Work history uploaded. The platform pings HR/verified emails of previous employers. Hard data replaces the r&eacute;sum&eacute;-photo-grammar heuristic.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="theme-num">03</div>
+        <div class="strategy-title">Detailed outreach</div>
+        <div class="strategy-desc">Transparency Score meter gates the send. Vague messages are blocked. The score is visible in the notification the IT pro receives.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="theme-num">04</div>
+        <div class="strategy-title">Initial call</div>
+        <div class="strategy-desc">Scheduled inside the platform. Recruiter focuses on culture fit instead of playing detective. Identity was validated before screening began.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="theme-num">05</div>
+        <div class="strategy-title">Progress visibility</div>
+        <div class="strategy-desc">Candidate dashboard updates in real time: Screened &rarr; Submitted &rarr; Interviewing &rarr; Decision. Status is a state, not a silence.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="theme-num">06</div>
+        <div class="strategy-title">Closing</div>
+        <div class="strategy-desc">Hire marked in-platform. Candidate profile updated to "Verified Hire at [Company]." The placement counts toward the recruiter's own credibility.</div>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <!-- 10 / OUTCOME -->
+    <section class="fade-in">
+      <p class="section-label">10 / outcome</p>
+      <h2 class="section-heading large">What's validated. What's next.</h2>
+
+      <div class="outcome-table">
+        <div class="outcome-header">
+          <div>Finding</div><div>Evidence</div><div></div>
+        </div>
+        <div class="outcome-row">
+          <div>Fraud reshapes behavior on both sides.</div>
+          <div>Recruiters limit candidate pools; candidates ignore recruiters by default.</div>
+        </div>
+        <div class="outcome-row">
+          <div>Platform verification fails the moment that matters.</div>
+          <div>Interview swap-outs happen even on verified profiles. Badges are process theater.</div>
+        </div>
+        <div class="outcome-row">
+          <div>Vagueness is the single biggest trust-killer.</div>
+          <div>Across every IT pro interview, specificity triggered engagement; "quick call?" triggered delete.</div>
+        </div>
+        <div class="outcome-row">
+          <div>Both sides want the same fix.</div>
+          <div>Reliable mutual verification, real role details up front, visible progress through the loop.</div>
+        </div>
+      </div>
+
+      <div style="height: 60px;"></div>
+      <p class="next-text">Next: validate the Transparency Score meter with recruiters in a paid concept test, and prototype the invite-only onboarding flow with a small cohort of IT professionals. The research is done. The question now is whether recruiters will accept a system that penalizes volume &mdash; and whether IT pros will trust a new platform before a network exists on it.</p>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="section-spacer"></div>
+    <div class="case-footer">
+      <div class="case-footer-nav">
+        <a href="#" onclick="showPage('neighbors'); window.scrollTo(0,0); return false;">&larr; prev case: Neighbors</a>
+        <a href="#" onclick="showPage('home'); window.scrollTo(0,0); return false;">back to work &rarr;</a>
+      </div>
+      <div class="case-copyright">&copy; 2026 brit fetz &middot; VeriHire. in collaboration with fellow designers</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== NEIGHBORS CASE STUDY ==================== -->
+<div id="page-neighbors" class="page">
+  <div class="container">
+
+    <a class="case-back" href="#" onclick="showPage('home'); window.scrollTo(0,0); return false;">&larr; back to work</a>
+    <p class="case-label">case &middot; 01</p>
+    <h1 class="case-title">Neighbors</h1>
+    <p class="case-subtitle">Making knocking on your neighbors door less awkward and more fun.</p>
+
+    <!-- META -->
+    <div class="meta-row">
+      <div><div class="meta-label">Role</div><div class="meta-value">product design &middot; research</div></div>
+      <div><div class="meta-label">With</div><div class="meta-value">co-designer</div></div>
+      <div><div class="meta-label">Timeframe</div><div class="meta-value">14 weeks</div></div>
+      <div><div class="meta-label">Market</div><div class="meta-value">barcelona</div></div>
+      <div><div class="meta-label">Year</div><div class="meta-value">2026</div></div>
+    </div>
+
+    <!-- LIVE LANDING PAGE EMBED -->
+    <div class="embed-wrapper">
+      <iframe src="https://britfetz.github.io/vecinos_landing/" class="embed-iframe" loading="lazy" allow="autoplay"></iframe>
+    </div>
+    <a class="prototype-link" href="https://britfetz.github.io/vecinos_landing/" target="_blank">view full landing page &nearr;</a>
+
+    <div class="section-spacer"></div>
+
+    <!-- 01 / CONTEXT -->
+    <section class="fade-in">
+      <p class="section-label">01 / context</p>
+      <h2 class="section-heading large">Inches apart, worlds away.</h2>
+      <p class="next-text">In Barcelona, you can live inches from someone &mdash; separated by a wall &mdash; and never exchange a word. Neighborhoods are rich with culture and local events, but residents lack a modern, considerate way to connect at the building or block level without the pressure, noise, or awkwardness of a WhatsApp group or an outdated community app.</p>
+    </section>
+
+    <div class="divider"></div>
+    <div class="section-spacer"></div>
+
+    <!-- 02 / RESEARCH -->
+    <section class="fade-in">
+      <p class="section-label">02 / research</p>
+      <h2 class="section-heading large">What we did. What we heard.</h2>
+
+      <div class="stats-row" style="padding: 40px 0;">
+        <div><div class="stat-number">100+</div><div class="stat-label">survey responses</div></div>
+        <div><div class="stat-number">50+</div><div class="stat-label">semi-structured interviews</div></div>
+        <div><div class="stat-number">10+</div><div class="stat-label">competitors benchmarked</div></div>
+        <div><div class="stat-number">3</div><div class="stat-label">archetypes synthesised</div></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Survey data -->
+      <div style="padding: var(--inner-gap) 0;">
+        <p class="persona-section-label">what the survey said</p>
+        <div class="survey-row"><div class="survey-stat">68%</div><div class="survey-text">feel disconnected from the people in their building.</div></div>
+        <div class="survey-row"><div class="survey-stat">62%</div><div class="survey-text">rarely communicate with those in closest proximity.</div></div>
+        <div class="survey-row" style="border-bottom: 1px solid var(--black);"><div class="survey-stat">100%</div><div class="survey-text">reported whatsapp as chaotic and unstructured for community.</div></div>
+      </div>
+
+      <div style="height: var(--inner-gap);"></div>
+
+      <!-- Cross-interview themes -->
+      <p class="persona-section-label">cross-interview themes</p>
+      <ul class="arrow-list" style="margin-top: 16px;">
+        <li>Disconnection is not a lack of interest.</li>
+        <li>WhatsApp is overloaded and unstructured.</li>
+        <li>Trust precedes participation.</li>
+        <li>Adoption must be building-led, not user-led.</li>
+        <li>"Neighbor" means same building. "Neighborhood" means a 10-15 minute walk.</li>
+        <li>Local event discovery is fragmented and outdated.</li>
+      </ul>
+    </section>
+
+    <div class="divider"></div>
+    <div class="section-spacer"></div>
+
+    <!-- 03 / INSIGHT -->
+    <section class="fade-in">
+      <p class="section-label">03 / insight</p>
+      <p class="insight-quote">"Residents don't need another place to chat. They need a trusted, structured layer that makes local coordination and awareness simple &mdash; without adding social pressure."</p>
+      <p class="insight-attr">&mdash; synthesis across 50+ interviews, march 2026</p>
+    </section>
+
+    <div class="divider"></div>
+    <div class="section-spacer"></div>
+
+    <!-- 04 / ARCHETYPES -->
+    <section class="fade-in">
+      <p class="section-label">04 / archetypes</p>
+      <h2 class="section-heading large">Who we're designing for.</h2>
+
+      <div class="persona-grid">
+        <div class="persona-card">
+          <p class="persona-label">Archetype 01</p>
+          <h3 class="persona-name">The Community Steward</h3>
+          <p class="persona-subtitle">place-invested resident</p>
+          <p class="persona-section-label">Behaviors</p>
+          <p class="persona-section-text">Knows most neighbors &middot; engages in building decisions &middot; values structure and boundaries.</p>
+          <p class="persona-section-label">Needs</p>
+          <p class="persona-section-text">Clear building announcements. Defined roles. Verified building-only access.</p>
+        </div>
+        <div class="persona-card">
+          <p class="persona-label">Archetype 02</p>
+          <h3 class="persona-name">The Cautious Connector</h3>
+          <p class="persona-subtitle">low-pressure social participant</p>
+          <p class="persona-section-label">Behaviors</p>
+          <p class="persona-section-text">Responds more than initiates &middot; prefers 1:1 &middot; avoids being first to post &middot; helps when asked.</p>
+          <p class="persona-section-label">Needs</p>
+          <p class="persona-section-text">Low-pressure requests. Signals others are responding. Notification digest. Verified access.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+    <div class="section-spacer"></div>
+
+    <!-- 05 / PRODUCT PILLARS -->
+    <section class="fade-in">
+      <p class="section-label">05 / product pillars</p>
+      <h2 class="section-heading large">Four things the product has to do.</h2>
+
+      <div class="strategy-row">
+        <div class="theme-num">01</div>
+        <div class="strategy-title">Small acts of neighborliness</div>
+        <div class="strategy-desc">Low-pressure ways for neighbors to help each other and break the ice.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="theme-num">02</div>
+        <div class="strategy-title">Local awareness</div>
+        <div class="strategy-desc">Hyperlocal life spotlighted within a 15-minute walking radius.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="theme-num">03</div>
+        <div class="strategy-title">Second-hand wins</div>
+        <div class="strategy-desc">Circular economy within the building or neighborhood, borrow before you buy.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="theme-num">04</div>
+        <div class="strategy-title">Digital boundaries</div>
+        <div class="strategy-desc">Trusted verification and community guidelines that protect the peace.</div>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <!-- 06 / DESIGN DECISIONS -->
+    <section class="fade-in">
+      <p class="section-label">06 / design decisions</p>
+      <h2 class="section-heading large">Three decisions that define the product.</h2>
+      <div class="divider"></div>
+
+      <div class="decision-block">
+        <p class="decision-label">Decision 01 &middot; Verification</p>
+        <h3 class="decision-title">Verification is a reward, not a barrier.</h3>
+        <p class="decision-sub-label">Tension</p>
+        <p class="decision-text">Verification is trust &mdash; but friction up front kills adoption.</p>
+        <p class="decision-sub-label">Decision</p>
+        <p class="decision-text">We separated access from trust. Users land in the product immediately. The verified badge is the reward, appearing on every post, every request, every responder card, creating quiet social pressure to verify without a single push notification. Unverified users can still view content and tap "I can help"; the requester decides whether to engage.</p>
+      </div>
+
+      <div class="decision-block">
+        <p class="decision-label">Decision 02 &middot; Posting</p>
+        <h3 class="decision-title">Templates kill the blank box.</h3>
+        <p class="decision-sub-label">Tension</p>
+        <p class="decision-text">The blank message box is the enemy of participation. Our Cautious Connector consistently hesitated to initiate &mdash; not out of fear of rejection, but fear of awkwardness.</p>
+        <p class="decision-sub-label">Decision</p>
+        <p class="decision-text">The Post button opens a drawer with five pre-typed templates: Receive a package &middot; Borrow an item &middot; Offer parking &middot; Ask for help &middot; Post an announcement. When "Receive a package" is listed as a standard option, asking your neighbor to hold a box stops feeling like an imposition and starts feeling like what the app is for.</p>
+      </div>
+
+      <div class="decision-block">
+        <p class="decision-label">Decision 03 &middot; Resolution</p>
+        <h3 class="decision-title">Multiple helpers, one clean resolution.</h3>
+        <p class="decision-sub-label">Tension</p>
+        <p class="decision-text">In WhatsApp, "Can someone help?" generates 15 replies of "I can!" with no accountability and no resolution. The request dies in noise.</p>
+        <p class="decision-sub-label">Decision</p>
+        <p class="decision-text">Any neighbor taps "I can help" &mdash; each response opens a private 1:1 thread visible only to the requester. The requester sees a list of everyone who offered, with verification status, and chooses who to coordinate with. When marked resolved, all threads archive. Warmth of community, clarity of a direct conversation.</p>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <!-- 07 / ROADMAP -->
+    <section class="fade-in">
+      <p class="section-label">07 / roadmap</p>
+      <h2 class="section-heading large">One building to one city.</h2>
+
+      <div class="roadmap-row">
+        <div class="roadmap-phase">Phase 0</div>
+        <div class="roadmap-date">apr &mdash; sep 2026</div>
+        <div class="roadmap-desc">Validate the core hypothesis. Three pilot buildings in Barcelona. Waitlist, lo-fi prototype, Go/No-Go by September.</div>
+        <div class="roadmap-label">Go-to-Market</div>
+      </div>
+      <div class="roadmap-row">
+        <div class="roadmap-phase">Phase 1</div>
+        <div class="roadmap-date">oct 2026 &mdash; apr 2027</div>
+        <div class="roadmap-desc">From three buildings to a cluster across the city. Local business partnerships. Multi-language (Catalan, Spanish, English). Referral mechanics.</div>
+        <div class="roadmap-label">Growth</div>
+      </div>
+      <div class="roadmap-row">
+        <div class="roadmap-phase">Phase 2</div>
+        <div class="roadmap-date">may &mdash; nov 2027</div>
+        <div class="roadmap-desc">Neighbors becomes a full hyperlocal utility. Ad module, service booking, district-level feeds, trust scoring, landlord portal.</div>
+        <div class="roadmap-label">Scale</div>
+      </div>
+      <div class="roadmap-row">
+        <div class="roadmap-phase">Phase 3</div>
+        <div class="roadmap-date">nov 2027 &mdash; apr 2028</div>
+        <div class="roadmap-desc">Madrid pilot launch. Planning for Valencia and Lisbon. White-label configuration for different city contexts.</div>
+        <div class="roadmap-label">Expand</div>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <!-- 08 / OUTCOME -->
+    <section class="fade-in">
+      <p class="section-label">08 / outcome</p>
+      <h2 class="section-heading large">What's validated. What ships next.</h2>
+
+      <div class="outcome-table">
+        <div class="outcome-header">
+          <div>Hypothesis</div><div>Status</div><div>Evidence</div>
+        </div>
+        <div class="outcome-row">
+          <div>Structured comms &gt; open chat.</div>
+          <div class="status-badge validated">validated</div>
+          <div>Residents reported WhatsApp groups are noisy; important updates get buried.</div>
+        </div>
+        <div class="outcome-row">
+          <div>Residents avoid awkward first moves.</div>
+          <div class="status-badge validated">validated</div>
+          <div>Participants prefer responding to requests rather than starting conversations.</div>
+        </div>
+        <div class="outcome-row">
+          <div>Presidents &amp; admins drive adoption.</div>
+          <div class="status-badge partial">partially validated</div>
+          <div>Buildings rely on presidents for updates, but tenants often excluded.</div>
+        </div>
+        <div class="outcome-row">
+          <div>New: residents lack visibility into admin.</div>
+          <div class="status-badge new">new opportunity</div>
+          <div>Owners pay admin companies yet still rely on WhatsApp to coordinate.</div>
+        </div>
+      </div>
+
+      <div style="height: 60px;"></div>
+      <p class="next-text">Next: a live landing page to seed the waitlist, three pilot buildings in Barcelona by September, and a Go/No-Go on the core hypothesis &mdash; will verified residents actually choose Neighbors over WhatsApp in a real-world setting &mdash; before we scale anything.</p>
+
+      <div style="height: var(--inner-gap);"></div>
+
+      <!-- Product showcase -->
+      <p class="persona-section-label">The Product</p>
+      <h3 class="section-heading" style="margin-top: 12px;">Home dashboard &mdash; four pillars, one screen.</h3>
+      <div class="product-showcase"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="section-spacer"></div>
+    <div class="case-footer">
+      <div class="case-footer-nav">
+        <a href="#" onclick="showPage('home'); window.scrollTo(0,0); return false;">&larr; back to work</a>
+        <a href="#" onclick="showPage('verihire'); window.scrollTo(0,0); return false;">next case: VeriHire &rarr;</a>
+      </div>
+      <div class="case-copyright">&copy; 2026 brit fetz &middot; Neighbors. in collaboration with fellow designers</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+  // Page navigation
+  function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const pageMap = {
+      'home': 'page-home',
+      'work': 'page-work',
+      'verihire': 'page-verihire',
+      'neighbors': 'page-neighbors'
+    };
+    const el = document.getElementById(pageMap[page]);
+    if (el) el.classList.add('active');
+
+    // Re-trigger fade-in animations
+    setTimeout(() => observeElements(), 100);
+  }
+
+  // Scroll-triggered fade-in
+  function observeElements() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  // Init
+  observeElements();
+</script>
+
+</body>
+</html>
