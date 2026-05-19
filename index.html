@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>brit fetz — Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inclusive+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -324,13 +327,84 @@
       font-size: 13px;
     }
 
-    /* ===== HERO IMAGE PLACEHOLDER ===== */
-    .hero-image {
+    /* ===== SPLIT CROP BANNER ===== */
+    .split-crop {
       width: 100%;
-      aspect-ratio: 2.6/1;
-      background: var(--gray-bg);
-      border-radius: 4px;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 5px;
       margin: 24px 0 16px;
+      background: var(--gray-bg);
+      border-radius: 6px;
+      padding: 5px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .sc-panel {
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .sc-panel-hero {
+      grid-row: 1 / 3;
+      grid-column: 2;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sc-panel-score {
+      background: #eeedfe;
+    }
+
+    .sc-label { font-size: 10px; color: #64748b; margin: 0 0 2px; }
+    .sc-value { font-size: 11px; color: #0f172b; margin: 0; font-weight: 500; }
+    .sc-field { background: #f7f5f2; border-radius: 5px; padding: 4px 7px; margin-bottom: 5px; }
+    .sc-field:last-child { margin-bottom: 0; }
+    .sc-title { font-size: 12px; font-weight: 600; color: #0f172b; margin: 0; }
+    .sc-subtitle { font-size: 10px; color: #64748b; margin: 0; }
+    .sc-green { color: #16a34a; font-weight: 600; }
+    .sc-purple { color: #534AB7; }
+    .sc-tag { font-size: 8px; color: #534AB7; background: #eeedfe; border-radius: 4px; padding: 2px 5px; }
+    .sc-chip { font-size: 10px; color: #64748b; background: #fff; border-radius: 4px; padding: 1px 5px; }
+    .sc-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .sc-avatar { border-radius: 50%; background: #e8e5e0; flex-shrink: 0; }
+    .sc-bar-track { width: 100%; height: 4px; background: #e8e5e0; border-radius: 2px; overflow: hidden; }
+    .sc-bar-fill { height: 100%; border-radius: 2px; }
+
+    .sc-msg-card {
+      background: #f7f5f2;
+      border-radius: 9px;
+      padding: 9px;
+      margin-bottom: 5px;
+    }
+
+    .sc-msg-card-top { border-left: 3px solid #534AB7; }
+
+    .sc-nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 9px 0 2px;
+      border-top: 1px solid #f0ede8;
+      margin-top: auto;
+      font-size: 10px;
+      color: #94a3b8;
+    }
+
+    .sc-nav-active { color: #534AB7; font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .split-crop {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .sc-panel-hero { grid-row: auto; grid-column: auto; }
     }
 
     .prototype-link {
@@ -642,23 +716,159 @@
       color: var(--gray-dark);
     }
 
-    /* ===== PRODUCT SHOWCASE ===== */
-    .product-showcase {
+    /* ===== FOUR PILLARS BANNER ===== */
+    .pillars-banner {
       width: 100%;
-      aspect-ratio: 1248/720;
-      background: var(--gray-bg);
-      border-radius: 4px;
+      background: #343631;
+      border-radius: 6px;
+      overflow: hidden;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      font-family: 'Inclusive Sans', system-ui, sans-serif;
     }
 
-    .product-showcase .coming-soon {
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+    .pillar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 14px 16px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .pillar-col:last-child { border-right: none; }
+
+    .pillar-num {
+      font-size: 11px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gray-mid);
+      color: #C8F55A;
+      margin: 0 0 4px;
+    }
+
+    .pillar-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 3px;
+    }
+
+    .pillar-desc {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      margin: 0 0 14px;
+      line-height: 1.4;
+    }
+
+    .pillar-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .pillar-card-center {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .pc-item {
+      background: #f5f4f2;
+      border-radius: 7px;
+      padding: 8px;
+    }
+
+    .pc-item-faded { opacity: 0.5; }
+
+    .pc-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 3px;
+    }
+
+    .pc-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pc-dot-purple { background: #8A7BF5; }
+    .pc-dot-lime { background: #C8F55A; }
+
+    .pc-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: #343631;
+      margin: 0;
+    }
+
+    .pc-time {
+      font-size: 8px;
+      color: #999;
+      margin: 0 0 0 auto;
+    }
+
+    .pc-text {
+      font-size: 9px;
+      color: #595959;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .pc-btn {
+      background: #8A7BF5;
+      border-radius: 5px;
+      padding: 3px 8px;
+      display: inline-block;
+      font-size: 8px;
+      color: #fff;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .pc-tag {
+      font-size: 7px;
+      color: #8A7BF5;
+      background: #eeedfe;
+      border-radius: 3px;
+      padding: 2px 5px;
+      margin-top: 4px;
+      display: inline-block;
+    }
+
+    .pc-check-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 4px;
+    }
+
+    .pc-check-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #C8F55A;
+    }
+
+    .pc-check-text {
+      font-size: 9px;
+      color: #595959;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .pillars-banner {
+        flex-direction: column;
+      }
+      .pillar-col {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .pillar-col:last-child { border-bottom: none; }
     }
 
     /* ===== THUMBNAIL ILLUSTRATIONS ===== */
@@ -1382,12 +1592,107 @@
       <div><div class="meta-label">Year</div><div class="meta-value">2025 &mdash; 2026</div></div>
     </div>
 
-    <!-- PROTOTYPE EMBED -->
-    <div class="embed-wrapper">
-      <iframe src="https://embed.figma.com/design/oxQQOvwc1NYEKL9wkJlVgy/VeriHire-Prototype?node-id=0-1&embed-host=share" class="embed-iframe" loading="lazy" allow="autoplay" scrolling="no"></iframe>
-    </div>
-    <a class="prototype-link" href="https://www.figma.com/design/oxQQOvwc1NYEKL9wkJlVgy/VeriHire-Prototype?node-id=0-1&t=VkhkPlnA7JsVI1HW-1" target="_blank">view full prototype &nearr;</a>
+    <!-- VERIHIRE SPLIT CROP BANNER -->
+    <div class="split-crop">
 
+      <!-- Top-left: New Outreach -->
+      <div class="sc-panel">
+        <p class="sc-title" style="margin-bottom:6px;">New Outreach</p>
+        <div class="sc-field"><p class="sc-label">Role</p><p class="sc-value">Sr. Backend Engineer</p></div>
+        <div class="sc-field"><p class="sc-label">Compensation</p><p class="sc-value sc-green">$180k – $220k</p></div>
+        <div class="sc-field"><p class="sc-label">Location</p><p class="sc-value">San Francisco (Hybrid)</p></div>
+      </div>
+
+      <!-- Center: Messages (spans both rows) -->
+      <div class="sc-panel sc-panel-hero">
+        <p style="font-size:14px;font-weight:600;color:#0f172b;margin:0 0 1px;">Messages</p>
+        <p class="sc-subtitle" style="margin-bottom:10px;">Sorted by transparency score</p>
+
+        <div class="sc-msg-card sc-msg-card-top">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+            <div class="sc-avatar" style="width:22px;height:22px;"></div>
+            <div style="flex:1;min-width:0;"><p style="font-size:10px;font-weight:600;color:#0f172b;margin:0;line-height:1.15;">Michael Rodriguez</p><p style="font-size:9px;color:#64748b;margin:0;">TechCorp</p></div>
+            <div class="sc-dot" style="background:#16a34a;"></div>
+            <span style="font-size:13px;font-weight:700;color:#534AB7;">92</span>
+          </div>
+          <p style="font-size:10px;font-weight:600;color:#0f172b;margin:0 0 2px;">Senior Backend Engineer</p>
+          <p style="font-size:10px;margin:0 0 4px;" class="sc-green">$180k – $220k <span style="color:#64748b;font-weight:400;">· San Francisco (Hybrid)</span></p>
+          <div style="display:flex;gap:3px;"><span class="sc-chip">Go</span><span class="sc-chip">Kubernetes</span><span class="sc-chip">PostgreSQL</span></div>
+        </div>
+
+        <div class="sc-msg-card">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+            <div class="sc-avatar" style="width:22px;height:22px;"></div>
+            <div style="flex:1;"><p style="font-size:10px;font-weight:600;color:#0f172b;margin:0;">Sarah Chen</p><p style="font-size:9px;color:#64748b;margin:0;">DataFlow Inc</p></div>
+            <div class="sc-dot" style="background:#16a34a;"></div>
+            <span style="font-size:13px;font-weight:700;color:#534AB7;">85</span>
+          </div>
+          <p style="font-size:10px;font-weight:600;color:#0f172b;margin:0 0 2px;">Full Stack Engineer</p>
+          <p style="font-size:10px;margin:0;" class="sc-green">$160k – $190k <span style="color:#64748b;font-weight:400;">· Remote</span></p>
+        </div>
+
+        <div class="sc-msg-card" style="opacity:0.45;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+            <div class="sc-avatar" style="width:22px;height:22px;"></div>
+            <div style="flex:1;"><p style="font-size:10px;font-weight:600;color:#0f172b;margin:0;">James Park</p><p style="font-size:9px;color:#64748b;margin:0;">CloudScale</p></div>
+            <div class="sc-dot" style="background:#16a34a;"></div>
+            <span style="font-size:13px;font-weight:700;color:#534AB7;">78</span>
+          </div>
+          <p style="font-size:10px;font-weight:600;color:#0f172b;margin:0;">DevOps Engineer</p>
+        </div>
+
+        <div class="sc-nav">
+          <span>Home</span>
+          <span class="sc-nav-active">Messages</span>
+          <span>Tracking</span>
+          <span>Profile</span>
+        </div>
+      </div>
+
+      <!-- Top-right: Profile / Vouching -->
+      <div class="sc-panel">
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;">
+          <div class="sc-avatar" style="width:28px;height:28px;"></div>
+          <div><p style="font-size:11px;font-weight:600;color:#0f172b;margin:0;">Alex Thompson</p><p class="sc-subtitle">Meta · Senior SWE</p></div>
+        </div>
+        <div style="background:#f7f5f2;border-radius:7px;padding:8px;">
+          <p class="sc-label" style="margin-bottom:4px;">Vouched by</p>
+          <div style="display:flex;align-items:center;gap:5px;">
+            <div class="sc-avatar" style="width:16px;height:16px;"></div>
+            <div><p style="font-size:10px;font-weight:500;color:#0f172b;margin:0;">Sarah Chen</p><p style="font-size:8px;color:#64748b;margin:0;">Eng. Manager, Meta</p></div>
+            <div class="sc-dot" style="background:#16a34a;margin-left:auto;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom-left: Transparency Score -->
+      <div class="sc-panel sc-panel-score" style="align-items:center;text-align:center;">
+        <p style="font-size:10px;font-weight:600;color:#534AB7;margin:0 0 2px;">Transparency Score</p>
+        <p style="font-size:32px;font-weight:700;color:#534AB7;margin:0;line-height:1;">92</p>
+        <div class="sc-bar-track" style="width:80%;margin:5px 0 4px;background:#c7c3f0;">
+          <div class="sc-bar-fill" style="width:92%;background:#534AB7;"></div>
+        </div>
+        <p style="font-size:9px;color:#16a34a;margin:0;">All required fields complete</p>
+      </div>
+
+      <!-- Bottom-right: Role Tracking -->
+      <div class="sc-panel">
+        <p class="sc-title" style="margin-bottom:8px;">Role Tracking</p>
+        <div style="margin-bottom:6px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><p class="sc-label">Interviewing</p><p class="sc-label">4</p></div>
+          <div class="sc-bar-track"><div class="sc-bar-fill" style="width:75%;background:#534AB7;"></div></div>
+        </div>
+        <div style="margin-bottom:6px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><p class="sc-label">Submitted</p><p class="sc-label">12</p></div>
+          <div class="sc-bar-track"><div class="sc-bar-fill" style="width:45%;background:#7c72d5;"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><p class="sc-label">Decision</p><p class="sc-label">2</p></div>
+          <div class="sc-bar-track"><div class="sc-bar-fill" style="width:25%;background:#a5a0e3;"></div></div>
+        </div>
+      </div>
+
+    </div>
     <div class="section-spacer"></div>
 
     <div class="case-body">
@@ -1891,7 +2196,84 @@
       <!-- Product showcase -->
       <p class="persona-section-label">The Product</p>
       <h3 class="section-heading" style="margin-top: 12px;">Home dashboard &mdash; four pillars, one screen.</h3>
-      <div class="product-showcase"><span class="coming-soon">coming soon</span></div>
+      <div class="pillars-banner">
+
+        <!-- Pillar 1: Neighborliness -->
+        <div class="pillar-col">
+          <p class="pillar-num">01</p>
+          <p class="pillar-name">Neighborliness</p>
+          <p class="pillar-desc">Small acts of help between people who share a wall</p>
+          <div class="pillar-card">
+            <div class="pc-item">
+              <div class="pc-row"><div class="pc-dot pc-dot-purple"></div><p class="pc-title">Maria (4B)</p></div>
+              <p class="pc-text" style="margin-bottom:5px;">Does anyone have a ladder I could borrow?</p>
+              <span class="pc-btn">I can help</span>
+            </div>
+            <div class="pc-item pc-item-faded">
+              <div class="pc-row"><div class="pc-dot pc-dot-purple"></div><p class="pc-title">James (2A)</p></div>
+              <p class="pc-text">Can someone watch my cat this weekend?</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pillar 2: Local Awareness -->
+        <div class="pillar-col">
+          <p class="pillar-num">02</p>
+          <p class="pillar-name">Local awareness</p>
+          <p class="pillar-desc">Know what's happening in the building before it affects you</p>
+          <div class="pillar-card">
+            <div class="pc-item">
+              <div class="pc-row"><div class="pc-dot pc-dot-lime"></div><p class="pc-title">Announcement</p><p class="pc-time">2h</p></div>
+              <p class="pc-text">Building maintenance Saturday 9am. Water shut off briefly.</p>
+              <span class="pc-tag">Building mgmt</span>
+            </div>
+            <div class="pc-item pc-item-faded">
+              <div class="pc-row"><div class="pc-dot pc-dot-lime"></div><p class="pc-title">Community event</p></div>
+              <p class="pc-text">Rooftop BBQ this Friday &mdash; bring a dish!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pillar 3: Circular Economy -->
+        <div class="pillar-col">
+          <p class="pillar-num">03</p>
+          <p class="pillar-name">Circular economy</p>
+          <p class="pillar-desc">Share, borrow, and give within the building</p>
+          <div class="pillar-card">
+            <div class="pc-item">
+              <div class="pc-row"><div class="pc-dot pc-dot-lime"></div><p class="pc-title">Offer</p></div>
+              <p class="pc-text" style="margin-bottom:4px;">Free moving boxes &mdash; first come first served</p>
+              <p style="font-size:8px;color:#999;margin:0;">James &middot; Apt 2A</p>
+            </div>
+            <div class="pc-item pc-item-faded">
+              <div class="pc-row"><div class="pc-dot pc-dot-purple"></div><p class="pc-title">Borrow</p></div>
+              <p class="pc-text">Anyone have a drill I can use for an hour?</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pillar 4: Digital Boundaries -->
+        <div class="pillar-col">
+          <p class="pillar-num">04</p>
+          <p class="pillar-name">Digital boundaries</p>
+          <p class="pillar-desc">Trust without surveillance, privacy by default</p>
+          <div class="pillar-card pillar-card-center">
+            <div style="width:40px;height:40px;border-radius:50%;border:2px solid #C8F55A;display:flex;align-items:center;justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5L2.25 4.5V8.25C2.25 12.41 5.1 16.29 9 17.25C12.9 16.29 15.75 12.41 15.75 8.25V4.5L9 1.5Z" stroke="#C8F55A" stroke-width="1.2" fill="none"/><path d="M6.75 9L8.25 10.5L11.25 7.5" stroke="#C8F55A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            </div>
+            <div>
+              <p class="pc-title" style="margin-bottom:2px;">Verified resident</p>
+              <p style="font-size:9px;color:#999;margin:0;">Apt 3C &middot; The Morrison</p>
+            </div>
+            <div style="width:100%;text-align:left;">
+              <div class="pc-check-row"><div class="pc-check-dot"></div><p class="pc-check-text">Address confirmed</p></div>
+              <div class="pc-check-row"><div class="pc-check-dot"></div><p class="pc-check-text">Phone verified</p></div>
+              <div class="pc-check-row" style="margin-bottom:0;"><div class="pc-check-dot"></div><p class="pc-check-text">Building matched</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
 
       </div><!-- end case-content -->
