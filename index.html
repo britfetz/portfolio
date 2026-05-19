@@ -18,7 +18,7 @@
       --red-accent: #c0392b;
       --max-width: 1248px;
       --side-pad: 96px;
-      --section-gap: 120px;
+      --section-gap: 160px;
       --label-head: 32px;
       --head-body: 48px;
       --inner-gap: 40px;
@@ -345,23 +345,32 @@
     .quote-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
+      gap: 32px;
     }
 
     .quote-card {
-      border-top: 2px solid var(--gray-light);
-      padding-top: 16px;
+      padding: 0;
     }
 
     .quote-text {
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.7;
       font-style: italic;
-      margin-bottom: 24px;
+      margin-bottom: 12px;
+      color: var(--gray-dark);
+    }
+
+    .quote-text::before {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gray-light);
+      margin-bottom: 16px;
     }
 
     .quote-attr {
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: 0.04em;
       color: var(--gray-mid);
     }
@@ -717,7 +726,7 @@
     @media (max-width: 768px) {
       :root {
         --side-pad: 24px;
-        --section-gap: 80px;
+        --section-gap: 100px;
       }
       .case-title { font-size: 40px; }
       .stats-row { grid-template-columns: repeat(2, 1fr); }
@@ -898,23 +907,72 @@
     .theme-list-compact {
       list-style: none;
       padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 40px;
     }
 
     .theme-list-compact li {
-      font-size: 14px;
-      line-height: 1.7;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--gray-light);
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 0;
       color: var(--gray-dark);
     }
 
-    .theme-list-compact li:first-child {
-      border-top: 1px solid var(--gray-light);
-    }
-
     .theme-list-compact li strong {
+      display: block;
       color: var(--black);
       font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .theme-list-compact { grid-template-columns: 1fr; }
+    }
+
+    /* ===== PATTERN GRID ===== */
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 60px;
+      padding-top: 16px;
+    }
+
+    .pattern-item {}
+
+    .pattern-num {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-mid);
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+
+    .pattern-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .pattern-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--gray-dark);
+    }
+
+    @media (max-width: 768px) {
+      .pattern-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    /* ===== PERSONA SIMPLIFIED ===== */
+    .persona-desc {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--gray-dark);
+      margin-top: 16px;
     }
 
     /* ===== SOLUTION CARD GRID ===== */
@@ -953,6 +1011,90 @@
       .solution-grid { grid-template-columns: 1fr; }
       .bar-row { grid-template-columns: 60px 1fr; gap: 16px; }
       .bar-value { font-size: 24px; }
+    }
+
+    /* ===== CASE STUDY LAYOUT WITH SIDEBAR ===== */
+    .case-body {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 60px;
+      position: relative;
+    }
+
+    .case-sidebar {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+      padding-top: 8px;
+    }
+
+    .case-sidebar-nav {
+      list-style: none;
+      padding: 0;
+      border-left: 1px solid var(--gray-light);
+    }
+
+    .case-sidebar-nav li {
+      padding: 8px 0 8px 16px;
+      position: relative;
+    }
+
+    .case-sidebar-nav a {
+      font-size: 11px;
+      letter-spacing: 0.03em;
+      color: var(--gray-mid);
+      transition: color 0.2s;
+      display: block;
+      line-height: 1.4;
+    }
+
+    .case-sidebar-nav a:hover {
+      color: var(--black);
+      opacity: 1;
+    }
+
+    .case-sidebar-nav li.active {
+      border-left: 2px solid var(--black);
+      margin-left: -1px;
+    }
+
+    .case-sidebar-nav li.active a {
+      color: var(--black);
+      font-weight: 600;
+    }
+
+    .case-content {
+      min-width: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .case-body {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .case-sidebar {
+        position: relative;
+        top: 0;
+        padding: 0 0 40px 0;
+      }
+      .case-sidebar-nav {
+        display: flex;
+        gap: 0;
+        border-left: none;
+        border-bottom: 1px solid var(--gray-light);
+        overflow-x: auto;
+      }
+      .case-sidebar-nav li {
+        padding: 12px 16px;
+        border-left: none;
+        white-space: nowrap;
+      }
+      .case-sidebar-nav li.active {
+        border-left: none;
+        margin-left: 0;
+        border-bottom: 2px solid var(--black);
+        margin-bottom: -1px;
+      }
     }
 
     /* ===== VERIHIRE RED ACCENT ===== */
@@ -1248,8 +1390,20 @@
 
     <div class="section-spacer"></div>
 
+    <div class="case-body">
+      <aside class="case-sidebar">
+        <ul class="case-sidebar-nav" data-case="verihire">
+          <li class="active"><a href="#vh-problem" onclick="scrollToSection('vh-problem'); return false;">The Problem</a></li>
+          <li><a href="#vh-learned" onclick="scrollToSection('vh-learned'); return false;">What We Learned</a></li>
+          <li><a href="#vh-solution" onclick="scrollToSection('vh-solution'); return false;">The Solution</a></li>
+          <li><a href="#vh-next" onclick="scrollToSection('vh-next'); return false;">What's Next</a></li>
+        </ul>
+      </aside>
+
+      <div class="case-content">
+
     <!-- THE PROBLEM -->
-    <section class="fade-in">
+    <section id="vh-problem" class="fade-in case-section">
       <p class="section-label">the problem</p>
       <h2 class="section-heading large">Trust is collapsing on both sides of the table.</h2>
       <p class="narrative-bridge">Digital recruiting has a dual-direction fraud problem. Recruiters get hit with fake candidates, interview imposters, and AI-assisted screen performances. IT professionals get hit with fake recruiters, phishing outreach, and vague job postings that lead nowhere. There is no neutral environment where both sides can prove who they are and engage safely.</p>
@@ -1306,7 +1460,7 @@
     <div class="section-spacer"></div>
 
     <!-- WHAT WE LEARNED -->
-    <section class="fade-in">
+    <section id="vh-learned" class="fade-in case-section">
       <p class="section-label">what we learned</p>
       <h2 class="section-heading large">What both sides told us.</h2>
 
@@ -1325,47 +1479,61 @@
         </div>
       </div>
 
-      <div style="height: var(--inner-gap);"></div>
+      <div style="height: 100px;"></div>
 
-      <p class="narrative-bridge">After transcription, initial coding, and affinity mapping, five patterns emerged across every interview:</p>
+      <p class="section-label">five patterns</p>
+      <h2 class="section-heading large" style="margin-bottom: 24px;">What emerged across every interview.</h2>
 
-      <ul class="theme-list-compact">
-        <li><strong>Fraud changes behavior on both sides.</strong> Recruiters limit who they'll consider; candidates become suspicious and less responsive. A downward spiral of mistrust.</li>
-        <li><strong>Admin burden is part of the trust problem.</strong> Overloaded workflows drive the blanket-messaging culture that candidates perceive as spam.</li>
-        <li><strong>Platform verification &ne; process verification.</strong> A badge doesn't stop an interview swap-out. Recruiters have watched a different person show up on day one.</li>
-        <li><strong>Trust is currently DIY.</strong> Both sides rely on personal heuristics &mdash; photo quality, grammar, eye movement, resume consistency &mdash; because platform-level proof is weak.</li>
-        <li><strong>Vagueness is interpreted as risk.</strong> Candidates want specifics. Vague outreach or vague postings feel scammy and kill engagement.</li>
-      </ul>
+      <div class="pattern-grid">
+        <div class="pattern-item">
+          <div class="pattern-num">01</div>
+          <p class="pattern-title">Fraud changes behavior on both sides.</p>
+          <p class="pattern-desc">Recruiters limit who they'll consider; candidates become suspicious and less responsive. A downward spiral.</p>
+        </div>
+        <div class="pattern-item">
+          <div class="pattern-num">02</div>
+          <p class="pattern-title">Admin burden is part of the trust problem.</p>
+          <p class="pattern-desc">Overloaded workflows drive blanket-messaging that candidates perceive as spam.</p>
+        </div>
+        <div class="pattern-item">
+          <div class="pattern-num">03</div>
+          <p class="pattern-title">Platform verification &ne; process verification.</p>
+          <p class="pattern-desc">A badge doesn't stop an interview swap-out. Recruiters have watched a different person show up on day one.</p>
+        </div>
+        <div class="pattern-item">
+          <div class="pattern-num">04</div>
+          <p class="pattern-title">Trust is currently DIY.</p>
+          <p class="pattern-desc">Both sides rely on personal heuristics &mdash; photo quality, grammar, eye movement &mdash; because platform-level proof is weak.</p>
+        </div>
+        <div class="pattern-item">
+          <div class="pattern-num">05</div>
+          <p class="pattern-title">Vagueness is interpreted as risk.</p>
+          <p class="pattern-desc">Candidates want specifics. Vague outreach or vague postings feel scammy and kill engagement.</p>
+        </div>
+      </div>
 
-      <div style="height: var(--inner-gap);"></div>
+      <div style="height: 100px;"></div>
 
       <p class="insight-quote" style="color: var(--red-accent);">"Fraud is creating a downward spiral. Recruiters get conservative, candidates get suspicious, and legitimate people on both sides lose access. The fix isn't more platform badges. It's process-level, two-sided trust."</p>
       <p class="insight-attr">&mdash; synthesis across 11 interviews, jan 2026</p>
 
-      <div style="height: var(--inner-gap);"></div>
+      <div style="height: 100px;"></div>
 
-      <p class="narrative-bridge">Two personas crystallized from the research &mdash; one from each side of the table.</p>
-
-      <div style="height: 24px;"></div>
+      <p class="section-label">who we're designing for</p>
+      <h2 class="section-heading large" style="margin-bottom: 24px;">One persona from each side of the table.</h2>
 
       <div class="persona-grid">
         <div class="persona-card">
           <p class="persona-label">Persona 01</p>
           <h3 class="persona-name">Alex</h3>
           <p class="persona-subtitle">sr. it recruiter &middot; 6+ yrs</p>
-          <p class="persona-section-label">Behaviors</p>
-          <p class="persona-section-text">Lives in LinkedIn Recruiter. Falls back to Dice. Checks photo quality, connections depth, resume-to-profile consistency. Now defaults to video screens because fraud changed the game.</p>
-          <p class="persona-section-label">Pain Points</p>
-          <p class="persona-section-text">Interview swap-outs. Keyword-stuffed r&eacute;sum&eacute;s. Platform badges that don't mean anything. High admin load forces blanket messaging &mdash; which candidates read as spam.</p>
+          <p class="persona-desc">Lives in LinkedIn Recruiter. Checks photo quality, connections depth, resume consistency. Now defaults to video screens because fraud changed the game. Wants a lightweight "proof" layer so screening isn't the first time identity is validated.</p>
         </div>
         <div class="persona-card">
           <p class="persona-label">Persona 02</p>
           <h3 class="persona-name">Jordan</h3>
           <p class="persona-subtitle">it professional &middot; active or passive</p>
-          <p class="persona-section-label">Behaviors</p>
-          <p class="persona-section-text">Judges recruiter legitimacy in seconds: sender domain, grammar, mutual connections, personalization, role specificity. Ignores low-effort platforms entirely.</p>
-          <p class="persona-section-label">Pain Points</p>
-          <p class="persona-section-text">Spam disguised as outreach. "Let's hop on a call" with no details. Vague job postings. Ghosting after interviews &mdash; used to pad a pipeline.</p>
+          <p class="persona-desc">Judges recruiter legitimacy in seconds: sender domain, grammar, mutual connections, role specificity. Ignores low-effort platforms entirely. Wants fewer, higher-signal messages and status visibility &mdash; even "no" beats silence.</p>
         </div>
       </div>
     </section>
@@ -1374,7 +1542,7 @@
     <div class="section-spacer"></div>
 
     <!-- THE SOLUTION -->
-    <section class="fade-in">
+    <section id="vh-solution" class="fade-in case-section">
       <p class="section-label">the solution</p>
       <h2 class="section-heading large">From platform trust to process trust.</h2>
       <p class="narrative-bridge">Both sides want the same thing: reliable mutual verification, real role details up front, and visible progress through the loop. We designed three features to make that real.</p>
@@ -1404,7 +1572,7 @@
     <div class="section-spacer"></div>
 
     <!-- WHAT'S NEXT -->
-    <section class="fade-in">
+    <section id="vh-next" class="fade-in case-section">
       <p class="section-label">what's next</p>
       <h2 class="section-heading large">The future loop &mdash; from invite to hire.</h2>
 
@@ -1467,6 +1635,9 @@
       <p class="next-text">Next: validate the Transparency Score meter with recruiters in a paid concept test, and prototype the invite-only onboarding flow with a small cohort of IT professionals. The research is done. The question now is whether recruiters will accept a system that penalizes volume &mdash; and whether IT pros will trust a new platform before a network exists on it.</p>
     </section>
 
+      </div><!-- end case-content -->
+    </div><!-- end case-body -->
+
     <!-- FOOTER -->
     <div class="section-spacer"></div>
     <div class="case-footer">
@@ -1506,8 +1677,20 @@
 
     <div class="section-spacer"></div>
 
+    <div class="case-body">
+      <aside class="case-sidebar">
+        <ul class="case-sidebar-nav" data-case="neighbors">
+          <li class="active"><a href="#nb-problem" onclick="scrollToSection('nb-problem'); return false;">The Problem</a></li>
+          <li><a href="#nb-learned" onclick="scrollToSection('nb-learned'); return false;">What We Learned</a></li>
+          <li><a href="#nb-solution" onclick="scrollToSection('nb-solution'); return false;">The Solution</a></li>
+          <li><a href="#nb-next" onclick="scrollToSection('nb-next'); return false;">What's Next</a></li>
+        </ul>
+      </aside>
+
+      <div class="case-content">
+
     <!-- THE PROBLEM -->
-    <section class="fade-in">
+    <section id="nb-problem" class="fade-in case-section">
       <p class="section-label">the problem</p>
       <h2 class="section-heading large">Inches apart, worlds away.</h2>
       <p class="narrative-bridge">In Barcelona, you can live inches from someone &mdash; separated by a wall &mdash; and never exchange a word. Neighborhoods are rich with culture and local events, but residents lack a modern, considerate way to connect at the building or block level. WhatsApp groups are chaotic. Community apps feel outdated. The result is silence between people who share the same stairwell.</p>
@@ -1546,48 +1729,65 @@
     <div class="section-spacer"></div>
 
     <!-- WHAT WE LEARNED -->
-    <section class="fade-in">
+    <section id="nb-learned" class="fade-in case-section">
       <p class="section-label">what we learned</p>
       <h2 class="section-heading large">Six patterns from 50+ conversations.</h2>
 
-      <ul class="theme-list-compact">
-        <li><strong>Disconnection is not a lack of interest.</strong> Residents want to know their neighbors but don't have a natural way to start.</li>
-        <li><strong>WhatsApp is overloaded.</strong> Important updates get buried in memes and noise. It's a chat tool, not a coordination tool.</li>
-        <li><strong>Trust precedes participation.</strong> People won't engage in a community space unless they feel safe and verified.</li>
-        <li><strong>Adoption must be building-led.</strong> Individual sign-ups don't work. The building president or a building admin has to bring people in.</li>
-        <li><strong>"Neighbor" means same building.</strong> "Neighborhood" means a 10&ndash;15 minute walk. The product needs both layers.</li>
-        <li><strong>Local event discovery is broken.</strong> Cultural events exist, but word-of-mouth and Instagram are the only channels. There's no hyperlocal feed.</li>
-      </ul>
+      <div class="pattern-grid">
+        <div class="pattern-item">
+          <div class="pattern-num">01</div>
+          <p class="pattern-title">Disconnection is not a lack of interest.</p>
+          <p class="pattern-desc">Residents want to know their neighbors but don't have a natural way to start.</p>
+        </div>
+        <div class="pattern-item">
+          <div class="pattern-num">02</div>
+          <p class="pattern-title">WhatsApp is overloaded.</p>
+          <p class="pattern-desc">Important updates get buried in memes and noise. It's a chat tool, not a coordination tool.</p>
+        </div>
+        <div class="pattern-item">
+          <div class="pattern-num">03</div>
+          <p class="pattern-title">Trust precedes participation.</p>
+          <p class="pattern-desc">People won't engage in a community space unless they feel safe and verified.</p>
+        </div>
+        <div class="pattern-item">
+          <div class="pattern-num">04</div>
+          <p class="pattern-title">Adoption must be building-led.</p>
+          <p class="pattern-desc">Individual sign-ups don't work. The building president or admin has to bring people in.</p>
+        </div>
+        <div class="pattern-item">
+          <div class="pattern-num">05</div>
+          <p class="pattern-title">"Neighbor" means same building.</p>
+          <p class="pattern-desc">"Neighborhood" means a 10&ndash;15 minute walk. The product needs both layers.</p>
+        </div>
+        <div class="pattern-item">
+          <div class="pattern-num">06</div>
+          <p class="pattern-title">Local event discovery is broken.</p>
+          <p class="pattern-desc">Word-of-mouth and Instagram are the only channels. There's no hyperlocal feed.</p>
+        </div>
+      </div>
 
-      <div style="height: var(--inner-gap);"></div>
+      <div style="height: 100px;"></div>
 
       <p class="insight-quote" style="color: var(--red-accent);">"Residents don't need another place to chat. They need a trusted, structured layer that makes local coordination and awareness simple &mdash; without adding social pressure."</p>
       <p class="insight-attr">&mdash; synthesis across 50+ interviews, march 2026</p>
 
-      <div style="height: var(--inner-gap);"></div>
+      <div style="height: 100px;"></div>
 
-      <p class="narrative-bridge">Two archetypes emerged from the research &mdash; and they shaped every design decision that followed.</p>
-
-      <div style="height: 24px;"></div>
+      <p class="section-label">who we're designing for</p>
+      <h2 class="section-heading large" style="margin-bottom: 24px;">Two archetypes shaped every decision.</h2>
 
       <div class="persona-grid">
         <div class="persona-card">
           <p class="persona-label">Archetype 01</p>
           <h3 class="persona-name">The Community Steward</h3>
           <p class="persona-subtitle">place-invested resident</p>
-          <p class="persona-section-label">Behaviors</p>
-          <p class="persona-section-text">Knows most neighbors &middot; engages in building decisions &middot; values structure and boundaries.</p>
-          <p class="persona-section-label">Needs</p>
-          <p class="persona-section-text">Clear building announcements. Defined roles. Verified building-only access.</p>
+          <p class="persona-desc">Knows most neighbors. Engages in building decisions. Values structure and boundaries. Needs clear announcements, defined roles, and verified building-only access.</p>
         </div>
         <div class="persona-card">
           <p class="persona-label">Archetype 02</p>
           <h3 class="persona-name">The Cautious Connector</h3>
           <p class="persona-subtitle">low-pressure social participant</p>
-          <p class="persona-section-label">Behaviors</p>
-          <p class="persona-section-text">Responds more than initiates &middot; prefers 1:1 &middot; avoids being first to post &middot; helps when asked.</p>
-          <p class="persona-section-label">Needs</p>
-          <p class="persona-section-text">Low-pressure requests. Signals others are responding. Notification digest. Verified access.</p>
+          <p class="persona-desc">Responds more than initiates. Prefers 1:1. Avoids being first to post. Needs low-pressure requests, signals others are responding, and verified access.</p>
         </div>
       </div>
     </section>
@@ -1596,7 +1796,7 @@
     <div class="section-spacer"></div>
 
     <!-- THE SOLUTION -->
-    <section class="fade-in">
+    <section id="nb-solution" class="fade-in case-section">
       <p class="section-label">the solution</p>
       <h2 class="section-heading large">A product built on four pillars &mdash; and three key decisions.</h2>
       <p class="narrative-bridge" style="color: var(--red-accent);">Everything we heard pointed in the same direction: residents need small acts of neighborliness, local awareness, circular economy at the building level, and digital boundaries that protect the peace. Here's how we turned those pillars into a product.</p>
@@ -1626,7 +1826,7 @@
     <div class="section-spacer"></div>
 
     <!-- WHAT'S NEXT -->
-    <section class="fade-in">
+    <section id="nb-next" class="fade-in case-section">
       <p class="section-label">what's next</p>
       <h2 class="section-heading large">One building to one city.</h2>
 
@@ -1694,6 +1894,9 @@
       <div class="product-showcase"><span class="coming-soon">coming soon</span></div>
     </section>
 
+      </div><!-- end case-content -->
+    </div><!-- end case-body -->
+
     <!-- FOOTER -->
     <div class="section-spacer"></div>
     <div class="case-footer">
@@ -1721,8 +1924,11 @@
     const el = document.getElementById(pageMap[page]);
     if (el) el.classList.add('active');
 
-    // Re-trigger fade-in animations
-    setTimeout(() => observeElements(), 100);
+    // Re-trigger fade-in and section tracking
+    setTimeout(() => {
+      observeElements();
+      observeSections();
+    }, 100);
   }
 
   // Scroll-triggered fade-in
@@ -1739,6 +1945,44 @@
     document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
       observer.observe(el);
     });
+  }
+
+  // Smooth scroll to section
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      const navHeight = 64;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - navHeight - 24;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  }
+
+  // Track active section in sidebar
+  let sectionObserver = null;
+  function observeSections() {
+    if (sectionObserver) sectionObserver.disconnect();
+
+    const sections = document.querySelectorAll('.page.active .case-section');
+    if (!sections.length) return;
+
+    const nav = document.querySelector('.page.active .case-sidebar-nav');
+    if (!nav) return;
+
+    sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          nav.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+          const link = nav.querySelector('a[href="#' + id + '"]');
+          if (link) link.parentElement.classList.add('active');
+        }
+      });
+    }, {
+      rootMargin: '-80px 0px -60% 0px',
+      threshold: 0
+    });
+
+    sections.forEach(s => sectionObserver.observe(s));
   }
 
   // Init
